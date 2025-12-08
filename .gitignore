@@ -1,0 +1,77 @@
+# ----------------------------------------
+# 1. OS 및 시스템 파일 (OS and System Files)
+# ----------------------------------------
+.DS_Store           # macOS에서 생성되는 파일
+Thumbs.db           # Windows에서 생성되는 파일
+
+# ----------------------------------------
+# 2. 파이썬 환경 및 의존성 (Python Environment & Dependencies)
+# ----------------------------------------
+# 가상 환경 디렉터리
+venv/               # 일반적인 가상 환경 이름
+.venv/              # Poetry 및 일부 환경에서 사용하는 이름
+env/
+.env/
+
+# 파이썬 캐시 디렉터리
+__pycache__/        # 파이썬이 생성하는 컴파일된 바이트코드(.pyc) 파일
+*.pyc               # 컴파일된 바이트코드 파일
+# Cython/PyInstaller 등에 의해 생성될 수 있는 파일
+*.so
+*.pyd
+
+# pip/setuptools 관련 파일
+pip-log.txt
+pip-delete-this-file.txt
+htmlcov/            # Coverage.py HTML 보고서 디렉터리
+
+# ----------------------------------------
+# 3. 빌드 및 배포 관련 (Build and Distribution)
+# ----------------------------------------
+# Setuptools/Wheel 등에 의해 생성되는 빌드 임시 및 결과물
+/dist/
+/build/
+*.egg-info/         # 패키지 정보 디렉터리
+.tox/               # tox 테스트 환경 디렉터리
+.mypy_cache/        # MyPy 타입 체커 캐시
+.pytest_cache/      # Pytest 캐시 디렉터리
+.ipynb_checkpoints  # Jupyter 노트북 체크포인트
+
+# ----------------------------------------
+# 4. IDE 및 에디터 설정 (IDE and Editor)
+# ----------------------------------------
+# VS Code
+.vscode/
+
+# PyCharm/IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------------------
+# 5. 보안 및 민감 정보 (Security and Sensitive Data)
+# ----------------------------------------
+# 환경 변수 파일 (가장 중요)
+.env                # 환경 변수 파일
+.flaskenv
+
+# 비밀 키, 인증서 등
+secret.key
+*.pem
+*.key
+*.cer
+
+# 데이터베이스 및 로컬 데이터
+*.sqlite3           # SQLite 데이터베이스 파일
+data/               # 모델 결과, 큰 데이터셋 등을 저장하는 폴더 (선택적)
+
+# ----------------------------------------
+# 6. 로그 및 기타 (Logs and Others)
+# ----------------------------------------
+*.log
+temp/
