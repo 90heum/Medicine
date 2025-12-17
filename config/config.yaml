@@ -1,0 +1,60 @@
+paths:
+  base_dir: /Users/apple/Medicine_Project/Medicine
+
+  raw:
+    dir: data/raw
+    image_dir: train_images
+    annotation_dir: train_annotations
+
+  filtered:
+    dir: data/raw/filtered
+    matched_images: matched_images
+    mismatched_images: mismatched_images
+    images_only: images_only
+    matched_annotations: matched_annotations
+    mismatched_annotations: mismatched_annotations
+    annotations_only: annotations_only
+
+  processed:
+    dir: data/processed
+
+  coco:
+    dir: data/processed/coco
+    images: images
+    mismatched_images: mismatched_images
+    labels: labels
+    mismatched_labels: mismatched_labels
+
+  yolo:
+    dir: data/processed/yolo
+    images: images
+    labels: labels
+    data_yaml: data/processed/yolo/yolo_data.yaml
+
+  mapping:
+    category_mapper: config/category_mapping.json
+
+
+train_args:
+  model: yolov8m.pt
+  epochs: 50
+  batch: 16
+  imgsz: 640
+  project: runs/detect
+  name: pill_exp
+  val: false
+
+
+inference_args:
+  model_path: "/Users/apple/data_process/best.pt"
+  img_dir: "data/raw/test_images"
+  conf: 0.2
+  iou: 0.6
+  max_det: 10
+  save: false
+  model_path_1: "runs/detect/pill_exp_v1/weights/best.pt"
+
+
+submission:
+  output_dir: "outputs/submissions"
+  filename: "submission.csv"
