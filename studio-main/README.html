@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PillPal 시스템 아키텍처 분석 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Font Application */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F0F4F8;
+            /* Light Grayish Blue Background */
+            color: #102A43;
+            /* Dark Blue Text */
+        }
+
+        /* Palette: Vibrant Blue & Tech */
+        .text-primary {
+            color: #2D31FA;
+        }
+
+        .bg-primary {
+            background-color: #2D31FA;
+        }
+
+        .text-secondary {
+            color: #05D6D9;
+        }
+
+        .bg-secondary {
+            background-color: #05D6D9;
+        }
+
+        .text-accent {
+            color: #F907FC;
+        }
+
+        .bg-accent {
+            background-color: #F907FC;
+        }
+
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            /* Base height */
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Material Design Cards */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Timeline Styling */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #E2E8F0;
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #2D31FA;
+            border: 4px solid white;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+    </style>
+    <!-- 
+        Palette Name: Electric Future
+        Colors: 
+        - Primary Blue: #2D31FA
+        - Cyan: #05D6D9
+        - Magenta: #F907FC
+        - Dark Navy: #102A43
+    -->
+    <!-- 
+        Narrative Plan:
+        1. Introduction: Define PillPal as a modern AI-powered system.
+        2. Core Components: Visual breakdown of the 4 pillars (Presentation, Logic, Intel, Inference).
+        3. Architecture Layers: A stacked visual representation of the system layers using HTML/CSS.
+        4. Data Flow: A vertical timeline showing the 4-step process from input to feedback.
+        5. Technical Excellence: A Radar chart visualizing the strengths (SoC, Performance, Scalability).
+        6. Conclusion.
+    -->
+    <!-- 
+        Chart Selection Justification:
+        1. Component Distribution -> Doughnut Chart (Chart.js): Shows the balanced composition of the system.
+        2. Technical Strengths -> Radar Chart (Chart.js): Perfect for comparing qualitative metrics like Performance vs Scalability.
+        3. Layers -> HTML/CSS Stack (Structured Diagram): Best for showing hierarchy without SVG.
+        4. Data Flow -> HTML/CSS Timeline: Best for showing sequence.
+        NO SVG used. NO Mermaid used.
+    -->
+</head>
+
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-primary text-white py-12 px-4 shadow-lg mb-10">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight">PillPal 시스템 아키텍처</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">AI 기반 스마트 헬스케어 솔루션의 구조적 심층 분석</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-20 space-y-16">
+
+        <!-- Section 1: Introduction & Core Pillars -->
+        <section>
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-[#102A43] mb-4 border-l-8 border-[#2D31FA] pl-4">1. 핵심 아키텍처 키워드</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    PillPal은 <strong>마이크로서비스 지향적 설계</strong>를 통해 각 기능의 독립성을 보장합니다.
+                    사용자 경험을 담당하는 프레젠테이션 계층부터 고성능 AI 추론 엔진까지, 4가지 핵심 영역이 유기적으로 결합되어 있습니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="card p-6 text-center border-t-4 border-[#2D31FA]">
+                    <div class="text-5xl mb-4">🖥️</div>
+                    <h3 class="text-xl font-bold mb-2">프레젠테이션</h3>
+                    <p class="text-sm font-semibold text-primary mb-2">Next.js 15</p>
+                    <p class="text-gray-500 text-sm">반응형 웹 및 사용자 인터랙션 담당</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card p-6 text-center border-t-4 border-[#05D6D9]">
+                    <div class="text-5xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-bold mb-2">로직</h3>
+                    <p class="text-sm font-semibold text-secondary mb-2">Server Actions</p>
+                    <p class="text-gray-500 text-sm">데이터 중계 및 API 게이트웨이 역할</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="card p-6 text-center border-t-4 border-[#F907FC]">
+                    <div class="text-5xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-2">인텔리전스</h3>
+                    <p class="text-sm font-semibold text-accent mb-2">Google Genkit</p>
+                    <p class="text-gray-500 text-sm">프롬프트 엔지니어링 및 흐름 제어</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="card p-6 text-center border-t-4 border-[#F9F871]">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">추론 엔진</h3>
+                    <p class="text-sm font-semibold text-yellow-500 mb-2">FastAPI + YOLO</p>
+                    <p class="text-gray-500 text-sm">고성능 이미지 분석 및 객체 탐지</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Component Distribution (Chart.js) & Architecture Diagram -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <!-- Left: Doughnut Chart -->
+            <div>
+                <h2 class="text-3xl font-bold text-[#102A43] mb-6 border-l-8 border-[#05D6D9] pl-4">2. 시스템 구성 비율</h2>
+                <p class="text-gray-600 mb-6">
+                    전체 시스템은 각 역할에 따라 균형 잡힌 구조를 가집니다. AI 로직과 추론 엔진이 백엔드의 핵심을 차지하며,
+                    최신 프론트엔드 기술이 이를 뒷받침합니다.
+                </p>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="componentChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-4">시스템 리소스 및 역할 비중 (개념적)</p>
+                </div>
+            </div>
+
+            <!-- Right: HTML Stacked Diagram (Layers) -->
+            <div>
+                <h2 class="text-3xl font-bold text-[#102A43] mb-6 border-l-8 border-[#F907FC] pl-4">3. 계층형 아키텍처 구조</h2>
+                <p class="text-gray-600 mb-6">
+                    데이터는 상위 사용자 계층에서 하위 AI 추론 계층으로 흐르며, 각 계층은 명확한 역할과 책임을 가집니다.
+                </p>
+
+                <div class="space-y-4">
+                    <!-- Layer 1 -->
+                    <div
+                        class="bg-gradient-to-r from-[#102A43] to-[#243B53] text-white p-4 rounded-lg shadow-md relative overflow-hidden">
+                        <div class="absolute right-0 top-0 h-full w-2 bg-[#2D31FA]"></div>
+                        <h4 class="font-bold text-lg">User Layer</h4>
+                        <p class="text-sm opacity-80">Browser (Mobile/Web)</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center text-gray-400 text-2xl">⬇</div>
+
+                    <!-- Layer 2 -->
+                    <div
+                        class="bg-gradient-to-r from-[#2D31FA] to-[#4C51BF] text-white p-4 rounded-lg shadow-md relative overflow-hidden">
+                        <div class="absolute right-0 top-0 h-full w-2 bg-[#05D6D9]"></div>
+                        <h4 class="font-bold text-lg">Frontend Layer</h4>
+                        <p class="text-sm opacity-80">Next.js 15 (App Router)</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center text-gray-400 text-2xl">⬇</div>
+
+                    <!-- Layer 3 -->
+                    <div
+                        class="bg-gradient-to-r from-[#05D6D9] to-[#38B2AC] text-white p-4 rounded-lg shadow-md relative overflow-hidden">
+                        <div class="absolute right-0 top-0 h-full w-2 bg-[#F907FC]"></div>
+                        <h4 class="font-bold text-lg">Middle Layer</h4>
+                        <p class="text-sm opacity-80">Next.js Server Actions</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center text-gray-400 text-2xl">⬇</div>
+
+                    <!-- Split Layer -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-r from-[#F907FC] to-[#B83280] text-white p-4 rounded-lg shadow-md">
+                            <h4 class="font-bold text-lg">Orchestration</h4>
+                            <p class="text-sm opacity-80">Google Genkit</p>
+                        </div>
+                        <div
+                            class="bg-gradient-to-r from-[#F9F871] to-[#ECC94B] text-[#102A43] p-4 rounded-lg shadow-md">
+                            <h4 class="font-bold text-lg">Inference</h4>
+                            <p class="text-sm opacity-80">FastAPI + YOLO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Data Flow Timeline -->
+        <section>
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-[#102A43] mb-4 inline-block border-b-4 border-[#2D31FA] pb-2">4. 핵심
+                    데이터 흐름 (Data Flow)</h2>
+                <p class="text-lg text-gray-600 mt-4">
+                    알약 인식 프로세스는 <strong>입력, 추론, 정제, 피드백</strong>의 4단계를 거쳐 사용자에게 정확한 정보를 전달합니다.
+                </p>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto px-4">
+                <!-- Vertical Line -->
+                <div class="timeline-line hidden md:block"></div>
+
+                <!-- Step 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative items-center">
+                    <div class="md:text-right order-2 md:order-1">
+                        <h3 class="text-2xl font-bold text-[#2D31FA]">1단계: 입력</h3>
+                        <p class="font-semibold text-gray-700">사용자 이미지 업로드</p>
+                        <p class="text-gray-500 mt-2 text-sm">PillRecognizer 컴포넌트에서 사진을 촬영하거나 업로드합니다. 데이터는 Server
+                            Actions로 안전하게 전송됩니다.</p>
+                    </div>
+                    <div
+                        class="hidden md:block absolute left-1/2 transform -translate-x-1/2 timeline-dot top-1/2 -mt-2">
+                    </div>
+                    <div class="order-1 md:order-2 bg-white p-6 rounded-xl shadow-md border-l-4 border-[#2D31FA]">
+                        <div class="text-4xl">📸</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative items-center">
+                    <div class="order-2 bg-white p-6 rounded-xl shadow-md border-r-4 border-[#F9F871] md:text-right">
+                        <div class="text-4xl">🤖</div>
+                    </div>
+                    <div
+                        class="hidden md:block absolute left-1/2 transform -translate-x-1/2 timeline-dot bg-yellow-400 top-1/2 -mt-2">
+                    </div>
+                    <div class="order-1 md:text-left">
+                        <h3 class="text-2xl font-bold text-yellow-600">2단계: 추론</h3>
+                        <p class="font-semibold text-gray-700">YOLO 모델 분석</p>
+                        <p class="text-gray-500 mt-2 text-sm">FastAPI 서버로 이미지가 릴레이되어, YOLO 모델이 알약의 특징점을 추출하고 명칭을 식별합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 relative items-center">
+                    <div class="md:text-right order-2 md:order-1">
+                        <h3 class="text-2xl font-bold text-[#F907FC]">3단계: 정제</h3>
+                        <p class="font-semibold text-gray-700">Genkit 데이터 가공</p>
+                        <p class="text-gray-500 mt-2 text-sm">단순 명칭을 넘어, 성분, 주의사항, 음식 상호작용 정보를 LLM을 통해 사용자 친화적인 한글로
+                            변환합니다.</p>
+                    </div>
+                    <div
+                        class="hidden md:block absolute left-1/2 transform -translate-x-1/2 timeline-dot bg-[#F907FC] top-1/2 -mt-2">
+                    </div>
+                    <div class="order-1 md:order-2 bg-white p-6 rounded-xl shadow-md border-l-4 border-[#F907FC]">
+                        <div class="text-4xl">✨</div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative items-center">
+                    <div class="order-2 bg-white p-6 rounded-xl shadow-md border-r-4 border-[#05D6D9] md:text-right">
+                        <div class="text-4xl">✅</div>
+                    </div>
+                    <div
+                        class="hidden md:block absolute left-1/2 transform -translate-x-1/2 timeline-dot bg-[#05D6D9] top-1/2 -mt-2">
+                    </div>
+                    <div class="order-1 md:text-left">
+                        <h3 class="text-2xl font-bold text-[#05D6D9]">4단계: 피드백</h3>
+                        <p class="font-semibold text-gray-700">결과 시각화</p>
+                        <p class="text-gray-500 mt-2 text-sm">가공된 정보가 대시보드에 업데이트되며, Toaster 알림을 통해 처리가 완료되었음을 즉각 알립니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Technical Excellence (Radar Chart) -->
+        <section class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-[#102A43] mb-6 border-l-8 border-[#2D31FA] pl-4">5. 기술적 우수성 분석
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        PillPal 아키텍처는 <strong>관심사 분리(SoC)</strong>, <strong>고성능 처리</strong>, 그리고 <strong>확장성</strong>에
+                        중점을 두고 설계되었습니다.
+                        오른쪽 차트는 이 시스템의 기술적 강점을 정량적으로 시각화한 것입니다.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-[#2D31FA] text-xl mr-2 font-bold">✓</span>
+                            <div>
+                                <strong class="text-[#102A43]">관심사 분리 (SoC):</strong>
+                                <p class="text-sm text-gray-500">UI, 로직, AI가 독립적으로 분리되어 유지보수가 용이합니다.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#2D31FA] text-xl mr-2 font-bold">✓</span>
+                            <div>
+                                <strong class="text-[#102A43]">최적화된 성능:</strong>
+                                <p class="text-sm text-gray-500">무거운 추론 작업은 Python 서버가, UI 렌더링은 Next.js가 담당하여 부하를 분산합니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#2D31FA] text-xl mr-2 font-bold">✓</span>
+                            <div>
+                                <strong class="text-[#102A43]">유연한 확장성:</strong>
+                                <p class="text-sm text-gray-500">새로운 AI 모델 도입 시 추론 레이어만 교체하면 되는 모듈형 구조입니다.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w-full flex justify-center">
+                    <div class="chart-container">
+                        <canvas id="techRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#102A43] text-white py-8 text-center">
+        <p class="opacity-70">&copy; 2025 PillPal Architecture Analysis. Created for Developer Briefing.</p>
+        <!-- NO SVG or Mermaid JS used confirmed -->
+    </footer>
+
+    <script>
+        // --- Helper Function: Label Wrapping (16 chars) ---
+        function wrapLabels(labels, maxChars = 16) {
+            return labels.map(label => {
+                if (label.length <= maxChars) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    if ((currentLine + " " + words[i]).length <= maxChars) {
+                        currentLine += " " + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            });
+        }
+
+        // --- Common Tooltip Config for Multiline Labels ---
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function (tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- Chart 1: Component Distribution (Doughnut) ---
+        const ctxComponent = document.getElementById('componentChart').getContext('2d');
+        const componentLabels = ['Frontend (Next.js)', 'Middleware (Actions)', 'Orchestration (Genkit)', 'Inference (FastAPI)'];
+        const wrappedComponentLabels = wrapLabels(componentLabels);
+
+        new Chart(ctxComponent, {
+            type: 'doughnut',
+            data: {
+                labels: wrappedComponentLabels,
+                datasets: [{
+                    data: [30, 20, 25, 25], // Estimated conceptual weight
+                    backgroundColor: [
+                        '#2D31FA', // Primary Blue
+                        '#05D6D9', // Cyan
+                        '#F907FC', // Magenta
+                        '#F9F871'  // Yellow
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { family: 'Noto Sans KR', size: 12 },
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    tooltip: commonTooltipConfig,
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2: Technical Excellence (Radar) ---
+        const ctxRadar = document.getElementById('techRadarChart').getContext('2d');
+        const techLabels = ['관심사 분리 (SoC)', '성능 최적화', '시스템 확장성', '유지보수 용이성', '보안성'];
+        const wrappedTechLabels = wrapLabels(techLabels);
+
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: wrappedTechLabels,
+                datasets: [{
+                    label: 'PillPal 아키텍처 점수',
+                    data: [9.5, 9.0, 9.2, 8.8, 8.5], // Hypothetical high scores based on description
+                    fill: true,
+                    backgroundColor: 'rgba(45, 49, 250, 0.2)', // Primary Blue transparent
+                    borderColor: '#2D31FA',
+                    pointBackgroundColor: '#F907FC', // Accent Magenta
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#2D31FA'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: {
+                            font: { family: 'Noto Sans KR', size: 12, weight: 'bold' },
+                            color: '#102A43'
+                        },
+                        suggestedMin: 5,
+                        suggestedMax: 10
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
